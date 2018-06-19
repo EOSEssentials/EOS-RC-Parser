@@ -3,6 +3,14 @@
 This library strips out the `{{ param }}` tags and replaces it with data from the transaction
 itself.
 
+## Installation
+
+```
+npm i -S eos-rc-parser 
+```
+
+
+
 ## Usage
 
 ```js
@@ -11,11 +19,11 @@ const parser = require('eos-rc-parser');
 const abi = await eos.contract(contractAccountName);
 const data = abi.fc.fromBuffer(action.name, action.data);
 const actionAbi = abi.fc.abi.actions.find(fcAction => fcAction.name === action.name);
-const ricardian = actionAbi ? actionAbi.ricardian_contract : null;
  
-const parsedRicardianContract = parser.parse(action.name, data, ricardian);
 
-// Optional parameters
+const parsedRicardianContract = parser.parse(action.name, data, actionAbi.ricardian_contract);
+ 
+// Optional HTML formatting
 const htmlOptions = {h1:'b', h2:'div class="someclass"'};
 const parsedRicardianContract = parser.parse(action.name, data, ricardian, signer, true || htmlOptions);
 ```
