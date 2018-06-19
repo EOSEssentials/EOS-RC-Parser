@@ -1,3 +1,14 @@
+
+
+// HELPERS //////////////////////////////////////////////////////
+
+/***
+ * Replaces curly brace placeholders
+ * @param ricardian
+ * @param placeholder
+ * @param replacement
+ * @returns {*}
+ */
 const replacePlaceholder = (ricardian, placeholder, replacement) => {
     while(ricardian.indexOf(`{{ ${placeholder} }}`) > -1)
         ricardian = ricardian.replace(`{{ ${placeholder} }}`, `"${replacement}"`);
@@ -20,6 +31,16 @@ const htmlDefaults = html => {
     return html;
 };
 
+
+// EXPORTED ///////////////////////////////////////////////////////////
+
+/***
+ * Parses the constitution
+ * @param constitution
+ * @param signingAccount
+ * @param html
+ * @returns {*}
+ */
 exports.constitution = (constitution, signingAccount, html = null) => {
     const getArticleTag = () => constitution.match(new RegExp('#' + "(.*)" + '-'));
 
@@ -43,6 +64,15 @@ exports.constitution = (constitution, signingAccount, html = null) => {
     return constitution;
 };
 
+/***
+ * Parses arbitrary contract action ricardian contracts.
+ * @param actionName
+ * @param actionParameters
+ * @param ricardianContract
+ * @param signingAccount
+ * @param html
+ * @returns {*}
+ */
 exports.parse = (actionName, actionParameters, ricardianContract, signingAccount = null, html = null) => {
     html = htmlDefaults(html);
 

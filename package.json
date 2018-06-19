@@ -1,14 +1,27 @@
 {
   "name": "eos-rc-parser",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "EOS Ricardian contract parser",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "build": "babel ./src/parser.js -o ./lib/index.js --presets es2015"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "nsjames",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EOSEssentials/EOS-RC-Parser"
+  },
+  "keywords": [
+    "EOS",
+    "Blockchain",
+    "Ridcardian Contracts"
+  ],
+  "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
     "chai": "^4.1.2",
     "mocha": "^5.2.0"
   }
