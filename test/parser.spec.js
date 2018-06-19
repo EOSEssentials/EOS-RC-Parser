@@ -36,9 +36,9 @@ describe('parser', () => {
     });
 
     it('should be able to parse the bidname action with html enabled and custom tags', () => {
-        const parsed = testAction('bidname', {bid: '3 EOS', bidder: 'testaccount', newname: 'somename'}, 'testaccount', {h1:'b', h2:'i'});
+        const parsed = testAction('bidname', {bid: '3 EOS', bidder: 'testaccount', newname: 'somename'}, 'testaccount', {h1:'b', h2:'i class="test"'});
         assert(parsed.indexOf('<b>') > -1, 'did not format html with custom tags');
-        assert(parsed.indexOf('<i>') > -1, 'did not format html with custom tags');
+        assert(parsed.indexOf('<i class="test">') > -1, 'did not format html with custom tags');
     });
 
     it('should be able to parse the constitution', () => {

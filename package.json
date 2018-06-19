@@ -1,6 +1,6 @@
 {
   "name": "eos-rc-parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "EOS Ricardian contract parser",
   "main": "lib/index.js",
   "scripts": {

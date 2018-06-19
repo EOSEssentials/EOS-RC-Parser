@@ -55,7 +55,7 @@ exports.constitution = (constitution, signingAccount, html = null) => {
 
         while(articleTag && articleTag[0].length){
             const strippedArticleTag = articleTag[0].replace('# ', '').replace(' -', '');
-            constitution = constitution.replace(articleTag[0], `<${html.h1}>${strippedArticleTag}</${html.h1}>`);
+            constitution = constitution.replace(articleTag[0], `<${html.h1}>${strippedArticleTag}</${html.h1.split(' ')[0]}>`);
             articleTag = getArticleTag();
         }
         constitution = constitution.replace(/[\n\r]/g, '<br>');
@@ -95,8 +95,8 @@ exports.parse = (actionName, actionParameters, ricardianContract, signingAccount
 
     // Optional HTML formatting.
     if(html !== null){
-        ricardianContract = ricardianContract.replace('# Action', `<${html.h1}>Action</${html.h1}>`);
-        ricardianContract = ricardianContract.replace('## Description', `<${html.h2}>Action</${html.h2}>`);
+        ricardianContract = ricardianContract.replace('# Action', `<${html.h1}>Action</${html.h1.split(' ')[0]}>`);
+        ricardianContract = ricardianContract.replace('## Description', `<${html.h2}>Action</${html.h2.split(' ')[0]}>`);
         ricardianContract = ricardianContract.replace(/[\n\r]/g, '<br>');
     }
 
