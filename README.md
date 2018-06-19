@@ -61,7 +61,7 @@ HTML formatting.
 parser.parse('bidname', {bid: '3 EOS', bidder: 'testaccount', newname: 'somename'}, ricardian, 'testaccount', {h1:'b', h2:'i class="test"'});
 ```
 ```
-<b>Action</b> - "bidname"<br><br><i class="test">Action</i><br><br>The "bidname" action places a bid on a premium account name, in the knowledge that the high bid will purchase the name.<br><br>As an authorized party I "testaccount" wish to bid on behalf of "testac
+<b>Action</b> - "bidname"<br><br><i class="test">Description</i><br><br>The "bidname" action places a bid on a premium account name, in the knowledge that the high bid will purchase the name.<br><br>As an authorized party I "testaccount" wish to bid on behalf of "testac
 count" the amount of "3 EOS" toward purchase of the account name "somename".<br>
 
 ```
