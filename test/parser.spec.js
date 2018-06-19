@@ -12,8 +12,8 @@ describe('parser', () => {
         const parsedRicardianContract = parser.parse(actionName, data, ricardian, signer, html);
         assert(parsedRicardianContract.indexOf('{{') === -1, `Could not parse the ${actionName} action`);
         assert(parsedRicardianContract.indexOf('}}') === -1, `Could not parse the ${actionName} action`);
-        // console.log(parsedRicardianContract);
-        // console.log('\r\n\------------------------------------------------------------------\r\n\ ');
+        console.log(parsedRicardianContract);
+        console.log('\r\n\------------------------------------------------------------------\r\n\ ');
         return parsedRicardianContract;
     };
 
@@ -39,6 +39,13 @@ describe('parser', () => {
         const parsed = testAction('bidname', {bid: '3 EOS', bidder: 'testaccount', newname: 'somename'}, 'testaccount', {h1:'b', h2:'i'});
         assert(parsed.indexOf('<b>') > -1, 'did not format html with custom tags');
         assert(parsed.indexOf('<i>') > -1, 'did not format html with custom tags');
+    });
+
+    it('should be able to parse the constitution', () => {
+        const ricardian = systemAbi.abi.ricardian_clauses[0].body;
+        const parsedRicardianContract = parser.constitution(ricardian, '', true);
+        assert(parsedRicardianContract.indexOf('{{') === -1, `Could not parse the constitution`);
+        assert(parsedRicardianContract.indexOf('}}') === -1, `Could not parse the constitution`);
     });
 
 });

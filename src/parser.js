@@ -4,18 +4,47 @@ const replacePlaceholder = (ricardian, placeholder, replacement) => {
     return ricardian;
 };
 
-exports.constitution = abi => {
+/***
+ * Html can be either a boolean, null, or an object of {h1,h2}
+ * @param html
+ * @returns {*}
+ */
+const htmlDefaults = html => {
+    if(html === null) return html;
+    if(html === false) return null;
 
+    if(typeof html === "boolean") html = {};
+    if(!html.hasOwnProperty('h1')) html.h1 = 'h1';
+    if(!html.hasOwnProperty('h2')) html.h2 = 'h2';
+
+    return html;
 };
 
-                                                                                        // { h1:'h1', h2:'h2' }
-exports.parse = (actionName, actionParameters, ricardianContract, signingAccount = null, html = null) => {
+exports.constitution = (constitution, signingAccount, html = null) => {
+    const getArticleTag = () => constitution.match(new RegExp('#' + "(.*)" + '-'));
 
+    html = htmlDefaults(html);
+
+    // Replacing signer
+    if(signingAccount) constitution = replacePlaceholder(constitution, "signer", signingAccount);
+
+    // Optional HTML formatting.
     if(html !== null){
-        if(typeof html === "boolean") html = {};
-        if(!html.hasOwnProperty('h1')) html.h1 = 'h1';
-        if(!html.hasOwnProperty('h2')) html.h2 = 'h2';
+        let articleTag = getArticleTag();
+
+        while(articleTag && articleTag[0].length){
+            const strippedArticleTag = articleTag[0].replace('# ', '').replace(' -', '');
+            constitution = constitution.replace(articleTag[0], `<${html.h1}>${strippedArticleTag}</${html.h1}>`);
+            articleTag = getArticleTag();
+        }
+        constitution = constitution.replace(/[\n\r]/g, '<br>');
     }
+
+    return constitution;
+};
+
+exports.parse = (actionName, actionParameters, ricardianContract, signingAccount = null, html = null) => {
+    html = htmlDefaults(html);
 
     // Stripping backticks
     ricardianContract =
