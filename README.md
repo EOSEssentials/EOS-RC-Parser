@@ -16,16 +16,18 @@ npm i -S eos-rc-parser
 ```js
 const parser = require('eos-rc-parser');
  
-const abi = await eos.contract(contractAccountName);
-const data = abi.fc.fromBuffer(action.name, action.data);
-const actionAbi = abi.fc.abi.actions.find(fcAction => fcAction.name === action.name);
- 
-
-const parsedRicardianContract = parser.parse(action.name, data, actionAbi.ricardian_contract);
- 
-// Optional HTML formatting
-const htmlOptions = {h1:'b', h2:'div class="someclass"'};
-const parsedRicardianContract = parser.parse(action.name, data, ricardian, signer, true || htmlOptions);
+from eosjs signProvider ... signargs.transaction.actions.map(async action => {
+    const abi = await eos.contract(contractAccountName);
+    const data = abi.fc.fromBuffer(action.name, action.data);
+    const actionAbi = abi.fc.abi.actions.find(fcAction => fcAction.name === action.name);
+     
+    
+    const parsedRicardianContract = parser.parse(action.name, data, actionAbi.ricardian_contract);
+     
+    // Optional HTML formatting
+    const htmlOptions = {h1:'b', h2:'div class="someclass"'};
+    const parsedRicardianContract = parser.parse(action.name, data, ricardian, signer, true || htmlOptions);
+}):
 ```
 
 Or constitution:
