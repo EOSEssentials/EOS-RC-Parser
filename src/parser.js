@@ -96,7 +96,7 @@ exports.parse = (actionName, actionParameters, ricardianContract, signingAccount
     // Optional HTML formatting.
     if(html !== null){
         ricardianContract = ricardianContract.replace('# Action', `<${html.h1}>Action</${html.h1.split(' ')[0]}>`);
-        ricardianContract = ricardianContract.replace('## Description', `<${html.h2}>Action</${html.h2.split(' ')[0]}>`);
+        ricardianContract = ricardianContract.replace('## Description', `<${html.h2}>Description</${html.h2.split(' ')[0]}>`);
         ricardianContract = ricardianContract.replace(/[\n\r]/g, '<br>');
     }
 
