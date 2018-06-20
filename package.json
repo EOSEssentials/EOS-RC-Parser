@@ -4,6 +4,10 @@
   "description": "EOS Ricardian contract parser",
   "main": "index.js",
   "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
   "scripts": {
     "test": "tsc && mocha",
     "posttest": "tslint --project .",
