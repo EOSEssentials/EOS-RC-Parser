@@ -1,15 +1,17 @@
+const fs = require('fs');
+const path = require('path');
 const assert = require('chai').assert;
+const rcParser = require('../');
 require('mocha');
 
-const parser = require('../src/parser');
 
 describe('parser', () => {
 
-    const systemAbi = require('./data/system.abi');
+    const systemAbi = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'system.abi'), 'utf8'));
 
     const testAction = (actionName, data, signer = null, html = null) => {
-        const ricardian = systemAbi.abi.actions.find(fcAction => fcAction.name === actionName).ricardian_contract;
-        const parsedRicardianContract = parser.parse(actionName, data, ricardian, signer, html);
+        const ricardian = systemAbi.actions.find(fcAction => fcAction.name === actionName).ricardian_contract;
+        const parsedRicardianContract = rcParser.parse(actionName, data, ricardian, signer, html);
         assert(parsedRicardianContract.indexOf('{{') === -1, `Could not parse the ${actionName} action`);
         assert(parsedRicardianContract.indexOf('}}') === -1, `Could not parse the ${actionName} action`);
         console.log(parsedRicardianContract);
@@ -42,8 +44,8 @@ describe('parser', () => {
     });
 
     it('should be able to parse the constitution', () => {
-        const ricardian = systemAbi.abi.ricardian_clauses[0].body;
-        const parsedRicardianContract = parser.constitution(ricardian, '', true);
+        const ricardian = systemAbi.ricardian_clauses[0].body;
+        const parsedRicardianContract = rcParser.constitution(ricardian, '', true);
         assert(parsedRicardianContract.indexOf('{{') === -1, `Could not parse the constitution`);
         assert(parsedRicardianContract.indexOf('}}') === -1, `Could not parse the constitution`);
     });

@@ -1,2 +1,5 @@
 .idea
 node_modules
+index.js
+index.d.ts
+package-lock.json
